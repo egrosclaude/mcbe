@@ -2,6 +2,8 @@
 Traductor sub-C, ensamblador e intérprete para la máquina MCBE
 
 
+[![asciicast](https://asciinema.org/a/Y0fQLbNV1Zd7yAOndrJJOtoI8.png)](https://asciinema.org/a/Y0fQLbNV1Zd7yAOndrJJOtoI8)
+
 ## Lenguaje de entrada
 
 ### Programa
