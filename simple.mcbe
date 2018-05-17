@@ -1,0 +1,5 @@
+	LD DATO
+	JZ FIN
+	ST OUT
+FIN:	HLT
+DATO:	1
