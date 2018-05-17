@@ -1,6 +1,6 @@
 # mcbecc
 
-Compilador de un subconjunto del lenguaje C hacia código de máquina de MCBE.
+Compilador de un subconjunto del lenguaje C hacia código ensamblador de MCBE.
 
 ## Lenguaje de entrada
 
