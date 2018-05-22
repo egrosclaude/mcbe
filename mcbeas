@@ -88,7 +88,7 @@ sub readprog {
 }
 
 # lee programa en codigo maquina
-sub readbin {
+sub readbytes {
 	my @l = ();
 	print "ARGV0 = ".$ARGV[0]."\n";
 	open INFILE, "$ARGV[0]" or die "Falta nombre de archivo";
@@ -173,12 +173,12 @@ sub asm2mem {
 	}
 }
 	
-sub asm2bin {
+sub asm2bytes {
 	my @prog = @_;
 	my $s;
 	foreach my $line(@prog) {
 		my ($nl, $inst, $arg, $bin) = @{$line};
-		$s .= $bin . "\n";
+		$s .= pack "c*", bin2dec($bin);
 	}
 	return $s;
 }
@@ -309,7 +309,7 @@ sub run {
 
 #----------------------------------
 
-if(scalar(@ARGV) == 0) {
+sub hints {
 	my $msg = "mcbeas $ARGV[0] [opciones] fuente.mcbe\n";
 	$msg .= "\t-a\tEnsamblar\n";
 	$msg .= "\t-i\tInterpretar\n";
@@ -317,15 +317,20 @@ if(scalar(@ARGV) == 0) {
 	$msg .= "\t-g\tGenerar binario\n";
 #	$msg .= "\t-r\tEjecutar binario\n";
 	die $msg;
+}
+
+if(scalar(@ARGV) == 0) {
+	hints();
 } 
 
 my @lines, @prog;
 
 if(defined $r) {
-	@lines = readbin;
-	#@prog = disassm(@lines);
-	bin2mem(@lines);
-	run(@prog);
+#	@lines = readbin;
+#	#@prog = disassm(@lines);
+#	bin2mem(@lines);
+#	run(@prog);
+	@bytes = readbytes;
 	exit;
 } else {
 	@lines = readprog;
@@ -336,10 +341,13 @@ if(defined $a) {
 	exit;
 }
 if(defined $g) {
-	print asm2bin(@prog);
+	print asm2bytes(@prog);
 	exit;
 }
 if(defined $i) {
 	run(@prog);
 	exit;
 }	
+
+hints();
+
