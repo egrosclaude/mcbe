@@ -1,3 +1,6 @@
+// imprimir cuenta desde 1 hasta a
+// a input de usuario
+
 int main()
 {
 	int a;

@@ -14,16 +14,9 @@ my ($main, $endmain) = (0,0);
 my $inwhile = 0;
 my $inif = 0;
 
-/int main()/ and setmain(1);
 
-sub setmain {
-	my $v = shift;
-	if($v == 0) {
-		$endmain = 1;
-	} else {
-		$main = 1;
-	}
-}
+/^\/\// and next;
+/int main()/ and setmain(1);
 
 /^\s*int\s*([[:alpha:]]+\d*)\s*=\s*(\d*)\s*;\s*$/ and newinit($1, $2);	# int a = 1
 /^\s*int\s*([[:alpha:]]+\d*)\s*;\s*$/ and newvar($1);			# int a
@@ -43,11 +36,21 @@ sub setmain {
 
 /^\s*while\(([[:alpha:]]+\d*)\s*\!=\s*(\d+)\)\s*{\s*$/ and while1begin($1,$2); # while(a != 2)
 /^\s*while\(([[:alpha:]]+\d*)\s*\!=\s*([[:alpha:]]+\d*)\)\s*{\s*$/ and while2begin($1,$2); # while(a != b)
-/}/ and condend();
+/^\s*}/ and condend();
 
 /^\s*if\(([[:alpha:]]+\d*)\s*\!=\s*(\d+)\)\s*{\s*$/ and if1begin($1,$2); # if(a != 2)
 /^\s*if\(([[:alpha:]]+\d*)\s*\!=\s*([[:alpha:]]+\d*)\)\s*{\s*$/ and if2begin($1,$2); # if(a != b)
 
+/^\s*printf\(\"([^)]*)\"\)\s*;\s*$/ and printstring($1);
+
+sub setmain {
+	my $v = shift;
+	if($v == 0) {
+		$endmain = 1;
+	} else {
+		$main = 1;
+	}
+}
 
 sub fatal {
 	my $msg = shift;
@@ -60,12 +63,43 @@ sub myprint {
 	print "@msg\n" if $DEBUG;
 }
 
+sub mklbl {
+	my $class = shift;
+
+	return sprintf "%s%02d", $class, $lastconst++;
+}
+
+sub printstring {
+	my $str = shift;
+
+	my @chars = split "", $str;
+	my $lbl = mklbl("LBL"); # incremento
+	my $inc = mklbl("INC"); # incremento
+	my $begin = mklbl("STR"); # puntero
+	my $end = mklbl("END");
+	push @consts, "$inc:\t1";
+	for my $i (0 .. $#chars) {
+		push @consts, (sprintf "%s\t%d", ($i ? "" : "$begin:"), ord($chars[$i]));
+	}
+	push @consts, "\t0"; # string null
+	push @prog, (
+		"$lbl:\tLD $begin", 
+		"\tJZ $end",
+		"\tST OUT",
+		"\tLD $lbl",
+		"\tADD $inc",
+		"\tST $lbl",
+		"\tJMP $lbl",
+		"$end:\tNOP"
+	);
+}
+
 sub if1begin {# if(a != 2)
 	my ($k, $v) = @_;
 	
 	testvar($k);
 	
-	my $dato = "DATO".$lastconst++;
+	my $dato = mklbl("DAT");
 	push @consts, "$dato:\t$v";
 
 	my $conde = "COND".$lastcond;
@@ -97,7 +131,7 @@ sub while1begin {# while(a != 2)
 	
 	testvar($k);
 	
-	my $dato = "DATO".$lastconst++;
+	my $dato = mklbl("DAT");
 	push @consts, "$dato:\t$v";
 
 	my $loopb = "LAZO".$lastcond;
@@ -212,7 +246,7 @@ sub asg5 { # a = 1 + a o a = 1 + b
 	testvar($k1);
 	testvar($k2);
 	
-	my $dato = "DATO".$lastconst++;
+	my $dato = mklbl("DAT");
 	push @consts, "$dato:\t$v";
 
 	push @prog, (
@@ -228,7 +262,7 @@ sub asg3 { # a = a + 1 o a = b + 1
 	testvar($k1);
 	testvar($k2);
 	
-	my $dato = "DATO".$lastconst++;
+	my $dato = mklbl("DAT");
 	push @consts, "$dato:\t$v";
 
 	if($k1 eq $k2) { # a = a + 1
@@ -252,7 +286,7 @@ sub asg1 { # a = 1
 
 	testvar($k);
 	
-	my $dato = "DATO".$lastconst++;
+	my $dato = mklbl("DAT");
 	push @consts, "$dato:\t$v";
 	push @prog, (
 		"\tLD $dato",
@@ -267,8 +301,8 @@ sub asg2 { # a = 1 + 2
 
 	testvar($k);
 	
-	my $dato1 = "DATO".$lastconst++;
-	my $dato2 = "DATO".$lastconst++;
+	my $dato1 = mklbl("DAT");
+	my $dato2 = mklbl("DAT");
 
 	push @consts, "$dato1:\t$v1";
 	push @consts, "$dato2:\t$v2";
