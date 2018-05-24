@@ -1,6 +1,17 @@
 # mcbe
-Traductor sub-C, ensamblador e intérprete para la máquina MCBE
+Scripts para trabajar con el Modelo Computacional Binario Elemental (MCBE)
 
+----
+
+
+## mcbecc
+Traductor sub-C a ensamblador para la máquina MCBE
+
+## mcbeas
+Ensamblador e intérprete para la máquina MCBE
+
+## mcbe
+Máquina virtual MCBE 
 
 [![asciicast](https://asciinema.org/a/Y0fQLbNV1Zd7yAOndrJJOtoI8.png)](https://asciinema.org/a/Y0fQLbNV1Zd7yAOndrJJOtoI8)
 
