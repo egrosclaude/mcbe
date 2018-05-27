@@ -6,7 +6,7 @@ $labels = {IN => 30, OUT => 31};
 our @MEM = ();
 our $IR = 0;
 our $PC = 0;
-our $A = 0;
+our $AC = 0;
 
 
 sub dec2bin {
@@ -143,30 +143,34 @@ sub execute {
 			$dato = <STDIN>;
 			@MEM[$addr] = dec2bin(8,$dato);
 		} 
-		$A = @MEM[$addr];
+		$AC = @MEM[$addr];
 		$PC++;
 
 	}
 	if($inst eq '011') { #ST
 		$addr = addr2dec($data);
-		#printf "A = %s dec2bin = %s \n",$A, dec2bin(8,$A);
-		@MEM[$addr] = dec2bin(8,bin2dec($A));
+		#printf "A = %s dec2bin = %s \n",$AC, dec2bin(8,$AC);
+		@MEM[$addr] = dec2bin(8,bin2dec($AC));
 		$PC++;
 		if($addr eq 31) {
-			printf "SALIDA: %s\n",bin2dec(@MEM[$addr]);
+			if(defined $A) {
+				printf "SALIDA: %s\n",chr(bin2dec(@MEM[$addr]));
+			} else {
+				printf "SALIDA: %d\n",bin2dec(@MEM[$addr]);
+			}
 			#$nada = <STDIN>;
 		}
 	}
 	if($inst eq '100') { #ADD
 		$addr = addr2dec($data);
 		$m = bin2dec(@MEM[$addr]);
-		$A = dec2bin(8,bin2dec($A) + $m);
+		$AC = dec2bin(8,bin2dec($AC) + $m);
 		$PC++;
 	}
 	if($inst eq '101') { #SUB
 		$addr = addr2dec($data);
 		my $m = bin2dec(@MEM[$addr]);
-		$A = dec2bin(8,bin2dec($A) - $m);
+		$AC = dec2bin(8,bin2dec($AC) - $m);
 		$PC++;
 	}
 	if($inst eq '001') { #HLT
@@ -181,7 +185,7 @@ sub execute {
 		$PC += $offset;
 	}
 	if($inst eq '111') { #JZ
-		if(bin2dec($A) == 0) {
+		if(bin2dec($AC) == 0) {
 			$offset = bin2dec($data);
 		#print "JZ OFFSET $offset\n";
 			$PC += $offset;
@@ -199,7 +203,7 @@ sub execute {
 #			$k = $i - $j;
 sub printstatus {
 	print "------------------------------------------------------------\n";
-	print "PC:$PC              IR:$IR            A:$A\n";
+	print "PC:$PC              IR:$IR            A:$AC\n";
 	print "------------------------------------------------------------\n";
 	foreach $j (0..7) {
 		foreach $i (0, 8, 16, 24) {
@@ -234,7 +238,7 @@ sub run {
 		$nada = <STDIN> if(defined $v);
 		$IR = @MEM[$PC];
 		$halt = execute($IR);
-		printstatus if (defined $v);
+		printstatus if(defined $v);
 	}
 
 	print "Programa Terminado\n";
