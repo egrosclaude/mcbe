@@ -18,27 +18,27 @@ my $inif = 0;
 /^\/\// and next;
 /int main()/ and setmain(1);
 
-/^\s*int\s*([[:alpha:]]+\d*)\s*=\s*(\d*)\s*;\s*$/ and newinit($1, $2);	# int a = 1
+/^\s*int\s*([[:alpha:]]+\d*)\s*=\s*(-*\d*)\s*;\s*$/ and newinit($1, $2);	# int a = 1
 /^\s*int\s*([[:alpha:]]+\d*)\s*;\s*$/ and newvar($1);			# int a
 
 /^\s*([[:alpha:]]+\d*)\+\+ *; *$/ and asg3($1, $1, "+", 1);	# a++;
 /^\s*([[:alpha:]]+\d*)-- *; *$/ and asg3($1, $1, "-", 1);	# a--;
 /^\s*([[:alpha:]]+\d*) *= *([[:alpha:]]+\d*) *; *$/ and asg4($1, $2); 		# a = b;
-/^\s*([[:alpha:]]+\d*) *= *([[:alpha:]]+\d*) *([\+-]) *(\d+) *; *$/ and asg3($1, $2, $3, $4);	# a = a + 1 o a = b + 1;
-/^\s*([[:alpha:]]+\d*) *= *(\d*) *([\+-]) *([[:alpha:]]+\d*) *; *$/ and asg5($1, $2, $3, $4);	# a = 1 + a o a = 1 + b;
+/^\s*([[:alpha:]]+\d*) *= *([[:alpha:]]+\d*) *([\+-]) *(-*\d+) *; *$/ and asg3($1, $2, $3, $4);	# a = a + 1 o a = b + 1;
+/^\s*([[:alpha:]]+\d*) *= *(-*\d*) *([\+-]) *([[:alpha:]]+\d*) *; *$/ and asg5($1, $2, $3, $4);	# a = 1 + a o a = 1 + b;
 /^\s*([[:alpha:]]+\d*) *= *([[:alpha:]]+\d*) *([\+-]) *([[:alpha:]]+\d*) *; *$/ and asg6($1, $2, $3, $4);	# a = b + c
 
-/^\s*([[:alpha:]]+\d*) *= *(\d+) *([\+-]) *(\d+) *; *$/ and asg2($1, $2, $3, $4);	# a = 1 + 2;
-/^\s*([[:alpha:]]+\d*) *= *(\d+) *; *$/ and asg1($1, $2); 		# a = 1;
+/^\s*([[:alpha:]]+\d*) *= *(-*\d+) *([\+-]) *(-*\d+) *; *$/ and asg2($1, $2, $3, $4);	# a = 1 + 2;
+/^\s*([[:alpha:]]+\d*) *= *(-*\d+) *; *$/ and asg1($1, $2); 		# a = 1;
 
 /^\s*in\(&([[:alpha:]]+\d*)\)\s*;\s*$/ and in($1);
 /^\s*out\(([[:alpha:]]+\d*)\)\s*;\s*$/ and out($1);
 
-/^\s*while\(([[:alpha:]]+\d*)\s*\!=\s*(\d+)\)\s*{\s*$/ and while1begin($1,$2); # while(a != 2)
+/^\s*while\(([[:alpha:]]+\d*)\s*\!=\s*(-*\d+)\)\s*{\s*$/ and while1begin($1,$2); # while(a != 2)
 /^\s*while\(([[:alpha:]]+\d*)\s*\!=\s*([[:alpha:]]+\d*)\)\s*{\s*$/ and while2begin($1,$2); # while(a != b)
 /^\s*}/ and condend();
 
-/^\s*if\(([[:alpha:]]+\d*)\s*\!=\s*(\d+)\)\s*{\s*$/ and if1begin($1,$2); # if(a != 2)
+/^\s*if\(([[:alpha:]]+\d*)\s*\!=\s*(-*\d+)\)\s*{\s*$/ and if1begin($1,$2); # if(a != 2)
 /^\s*if\(([[:alpha:]]+\d*)\s*\!=\s*([[:alpha:]]+\d*)\)\s*{\s*$/ and if2begin($1,$2); # if(a != b)
 
 /^\s*printf\(\"([^)]*)\"\)\s*;\s*$/ and printstring($1);
@@ -99,7 +99,7 @@ sub if1begin {# if(a != 2)
 	
 	testvar($k);
 	
-	my $dato = mklbl("DAT");
+	my $dato = mklbl("DATO");
 	push @consts, "$dato:\t$v";
 
 	my $conde = "COND".$lastcond;
@@ -131,7 +131,7 @@ sub while1begin {# while(a != 2)
 	
 	testvar($k);
 	
-	my $dato = mklbl("DAT");
+	my $dato = mklbl("DATO");
 	push @consts, "$dato:\t$v";
 
 	my $loopb = "LAZO".$lastcond;
@@ -246,7 +246,7 @@ sub asg5 { # a = 1 + a o a = 1 + b
 	testvar($k1);
 	testvar($k2);
 	
-	my $dato = mklbl("DAT");
+	my $dato = mklbl("DATO");
 	push @consts, "$dato:\t$v";
 
 	push @prog, (
@@ -262,7 +262,7 @@ sub asg3 { # a = a + 1 o a = b + 1
 	testvar($k1);
 	testvar($k2);
 	
-	my $dato = mklbl("DAT");
+	my $dato = mklbl("DATO");
 	push @consts, "$dato:\t$v";
 
 	if($k1 eq $k2) { # a = a + 1
@@ -286,7 +286,7 @@ sub asg1 { # a = 1
 
 	testvar($k);
 	
-	my $dato = mklbl("DAT");
+	my $dato = mklbl("DATO");
 	push @consts, "$dato:\t$v";
 	push @prog, (
 		"\tLD $dato",
@@ -301,8 +301,8 @@ sub asg2 { # a = 1 + 2
 
 	testvar($k);
 	
-	my $dato1 = mklbl("DAT");
-	my $dato2 = mklbl("DAT");
+	my $dato1 = mklbl("DATO");
+	my $dato2 = mklbl("DATO");
 
 	push @consts, "$dato1:\t$v1";
 	push @consts, "$dato2:\t$v2";
