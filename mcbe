@@ -71,14 +71,14 @@ sub readprog {
 # lee programa en codigo maquina
 sub readbytes {
 	my @l = ();
-	print "ARGV0 = ".$ARGV[0]."\n";
-	open INFILE, "$ARGV[0]" or die "Falta nombre de archivo";
-	while(<INFILE>) {
-#		/^([0-1]+)/ and $line = disassm($1);
-#use Data::Dumper; print Dumper($line);
-		push @l, $line;
+	#print "ARGV0 = ".$ARGV[0]."\n";
+	open (my $INFILE, "$ARGV[0]") or die "Falta nombre de archivo";
+	binmode($INFILE);
+	while(read ($INFILE, my $byte, 1)) {
+		push @l, $byte;
 	}
-	close INFILE;
+	close $INFILE;
+	#use Data::Dumper; print Dumper(@l);
 	return @l;
 }
 
@@ -87,35 +87,6 @@ sub disassm {
 	my ($inst, $dat) = (substr($code, 0, 3), substr($code, 3));
 	printf "inst %s dat %s\n", $inst, $dat;
 	return "instruccion";
-}
-
-sub makeasm {
-	my @lineslist = @_;
-	foreach my $l (@lineslist) {
-		my ($type, $nl, $inst, $arg, $bin) = @{$l};
-		if($type eq "LBLARG") {
-			#print "LBLARG\n";
-			$arg = $labels->{$arg};
-			if($inst =~ /JMP|JZ/) {
-				$arg -= $nl;
-			}
-			$bin = insttobin($inst,$arg);
-		} 
-		if($type eq "NUMARG") {
-			#print "MAKEASM ARG=$arg\n";
-			$bin = insttobin($inst,$arg);
-		}
-		if($type eq "NONARG") {
-			$bin = insttobin($inst,0);
-		}
-		if($type eq "DATA") {
-			$bin = dec2bin(8,$arg);
-		}
-		#print "MAKEASM $type $nl $inst $arg $bin\n";
-		
-		push @l, [$nl,$inst,$arg,$bin];
-	}
-	return @l;
 }
 
 
@@ -142,15 +113,7 @@ sub bin2mem {
 	my $nl = 0;
 	foreach my $line(@lines) {
 		@MEM[$nl++] = $line;
-		use Data::Dumper; print Dumper(@MEM);
-	}
-}
-	
-sub asm2mem {
-	my @prog = @_;
-	foreach my $line(@prog) {
-		my ($nl, $inst, $arg, $bin) = @{$line};
-		@MEM[$nl] = $bin;
+		#use Data::Dumper; print Dumper(@MEM);
 	}
 }
 	
@@ -231,20 +194,9 @@ sub execute {
 
 # direcciones bajas abajo
 #sub printstatus {
-#	print "------------------------------------------------------------\n";
-#	print "PC:$PC              IR:$IR            A:$A\n";
-#	print "------------------------------------------------------------\n";
 #	foreach $j (0..7) {
 #		foreach $i (7, 15, 23, 31) {
 #			$k = $i - $j;
-#			printf "%3d %8s\t",$k,$MEM[$k];
-#		}
-#		print "\n";
-#	}
-#	print "------------------------------------------------------------\n";
-#	$nada = <STDIN>;
-#}
-	
 sub printstatus {
 	print "------------------------------------------------------------\n";
 	print "PC:$PC              IR:$IR            A:$A\n";
@@ -288,15 +240,23 @@ sub run {
 	print "Programa Terminado\n";
 }
 
+sub bytes2bin {
+	my @bytes = @_;
+	
+	my @bins = ();
+	foreach my $byte (@bytes) {
+    		my $b = unpack("B8", $byte);
+	#use Data::Dumper; print Dumper($b);
+		push @bins, $b;
+	}
+	return @bins;
+}
 #----------------------------------
 
 sub hints {
-	my $msg = "mcbeas [opciones] $ARGV[0] fuente.mcbe | -\n";
-	$msg .= "\t-a\tEnsamblar\n";
-	$msg .= "\t-i\tInterpretar\n";
+	my $msg = "mcbe [opciones] $ARGV[0] programa | -\n";
 	$msg .= "\t-v\tVerboso\n";
-	$msg .= "\t-g\tGenerar binario\n";
-#	$msg .= "\t-r\tEjecutar binario\n";
+	$msg .= "\t-A\tSalida en ASCII\n";
 	die $msg;
 }
 
@@ -304,31 +264,11 @@ if(scalar(@ARGV) == 0) {
 	hints();
 } 
 
-my @lines, @prog;
+my @lines, @prog, @bins;
 
-if(defined $r) {
-#	@lines = readbin;
-#	#@prog = disassm(@lines);
-#	bin2mem(@lines);
-#	run(@prog);
-	@bytes = readbytes;
-	exit;
-} else {
-	@lines = readprog;
- 	@prog = assemble(@lines);
-}
-if(defined $a) {
-	printasm(@prog);
-	exit;
-}
-if(defined $g) {
-	print asm2bytes(@prog);
-	exit;
-}
-if(defined $i) {
-	run(@prog);
-	exit;
-}	
-
-hints();
+@bytes = readbytes;
+@bins = bytes2bin(@bytes);
+bin2mem(@bins);
+run(@prog);
+exit;
 

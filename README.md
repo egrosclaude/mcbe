@@ -18,7 +18,7 @@ Scripts para trabajar con el Modelo Computacional Binario Elemental
 
 ### Programa
 
-- Un programa constituido por una única función, main().
+- Constituido por una única función, main()
 - Sentencias terminadas por punto y coma
 
 ```
@@ -37,6 +37,7 @@ int main()
 - Deben estar declaradas 
 - Sus nombres pueden contener dígitos pero deben comenzar por una letra
 - Opcionalmente, inicializadas en la declaración
+- Constantes y variables son almacenadas en 8 bits en complemento a 2
 
 ```
 int main()
@@ -69,6 +70,7 @@ int main()
 
 - Sumas y restas entre exactamente dos operandos
 - Los operandos pueden ser variables o constantes
+- Únicamente pueden aparecer como miembro derecho de una asignación
 
 ```
 int main()
@@ -160,7 +162,7 @@ int main()
 {
 	int a;
 
-  in(&a);
+	in(&a);
 	if(a != 10) {
 		a = a + 1;
 	}
@@ -187,6 +189,10 @@ int main()
 	out(b);
 }
 ```
+
+### Comentarios
+
+- Una línea de comentarios se prefija con doble barra (//)
 # mcbeas
 TODO
 # mcbe
