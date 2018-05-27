@@ -1,5 +1,5 @@
-# Modelo Computacional Binario Elemental: mcbe
-Scripts para trabajar con el Modelo Computacional Binario Elemental (MCBE)
+# MCBE: Modelo Computacional Binario Elemental
+Scripts para trabajar con el Modelo Computacional Binario Elemental
 
 ----
 -  [Traductor mcbecc](#mcbecc)
@@ -7,6 +7,7 @@ Scripts para trabajar con el Modelo Computacional Binario Elemental (MCBE)
 - [Ensamblador mcbeas](#mcbeas)
   Ensamblador e intérprete para la máquina MCBE
 - [Máquina virtual mcbe](#mcbe)
+  Ejecuta programas en código de máquina MCBE
 
 
 [![asciicast](https://asciinema.org/a/Y0fQLbNV1Zd7yAOndrJJOtoI8.png)](https://asciinema.org/a/Y0fQLbNV1Zd7yAOndrJJOtoI8)
