@@ -113,9 +113,9 @@ int main()
 ## Entrada y salida
 
 - Dos funciones de E/S de bytes, in() y out().
-- La función de entrada in() recibe como argumento la dirección de una variable. Espera el ingreso de un número a cargo del usuario.
 - Una función de E/S de strings, printf().
 
+La función de entrada in() recibe como argumento la dirección de una variable. Espera el ingreso de un número a cargo del usuario.
 ```
 int main()
 {
@@ -124,7 +124,8 @@ int main()
    in(&b);
 }
 ```
-- La función de salida out() recibe como argumento la variable cuyo contenido se desea imprimir.
+
+La función de salida out() recibe como argumento la variable cuyo contenido se desea imprimir.
 
 ```
 int main()
@@ -134,7 +135,7 @@ int main()
    out(b);
 }
 ```
-- La función de salida printf() recibe como argumento un string. No hace conversiones. Es equivalente a un lazo formado por llamadas a out().
+La función de salida printf() recibe como argumento un string. No hace conversiones. Es equivalente a un lazo formado por llamadas a out().
 
 ```
 int main()
