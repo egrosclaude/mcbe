@@ -8,6 +8,7 @@ Scripts para trabajar con el Modelo Computacional Binario Elemental
   Ensamblador e intérprete para la máquina MCBE
 - [Máquina virtual mcbe](#mcbe)
   Ejecuta programas en código de máquina MCBE
+- [Cómo usar los programas](#como_usar)
 
 [![asciicast](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5.png)](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5)
 
