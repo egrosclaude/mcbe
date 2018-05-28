@@ -2,8 +2,8 @@
 Scripts para trabajar con el Modelo Computacional Binario Elemental
 
 ----
--  [Traductor mcbecc](#mcbecc)
-   Traductor sub-C a ensamblador para la máquina MCBE
+- [Traductor mcbecc](#mcbecc)
+  Traductor sub-C a ensamblador para la máquina MCBE
 - [Ensamblador mcbeas](#mcbeas)
   Ensamblador e intérprete para la máquina MCBE
 - [Máquina virtual mcbe](#mcbe)

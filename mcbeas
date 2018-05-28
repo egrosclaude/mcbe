@@ -1,4 +1,4 @@
-#!/usr/bin/perl -s
+#!/usr/bin/perl -s 
 
 $codes = { LD => 2, ST => 3, ADD => 4, SUB => 5, 
 	JMP => 6, JZ => 7, HLT => 1, NOP => 0 };
@@ -8,7 +8,7 @@ our $IR = 0;
 our $PC = 0;
 our $A = 0;
 
-
+#------------------------------------
 sub dec2bin {
 	($fld, $num) = @_;   
     my $str = unpack("B32", pack("N", $num));
@@ -31,13 +31,13 @@ sub bin2dec {
 	return $n;
 }
 
+#------------------------------------
 
 
 
 sub insttobin {
-	($mnem, $arg) = @_;
+	my ($mnem, $arg) = @_;
 	
-#	print "MNEM $mnem ARG $arg\n";
 	$binst = dec2bin(3,$codes->{$mnem});
 	$bdat  = dec2bin(5,$arg);
 	return $binst.$bdat;
@@ -52,8 +52,7 @@ sub data 	{ $data = shift; 	return ['DATA', 	$lnum++, 	"", 	$data,	""]; }
 # lee programa en ensamblador
 sub readprog {
 	my @l = ();
-	open INFILE, ("$ARGV0" eq "-") ? STDIN : "$ARGV[0]" or die "Falta nombre de archivo";
-	while(<INFILE>) {
+	while(<>) {
 		/^([A-Z]+[0-9]*):/ and setlabel($1);
 		/^ *\t*([A-Z]+) *$/ and push @l, noarg($1);
 		/^ *\t*([A-Z]+) +(-*[0-9]+)/ and push @l, numarg($1,$2);
@@ -64,29 +63,8 @@ sub readprog {
 		/^[A-Z]+[0-9]*: *\t*+([A-Z]+) +([A-Z]+[0-9]*)/ and push @l, lblarg($1,$2);
 		/^[A-Z]+[0-9]*: *\t*(-*\d+)/ and push @l, data($1);
 	}
-	close INFILE;
+	#close INFILE;
 	return @l;
-}
-
-# lee programa en codigo maquina
-sub readbytes {
-	my @l = ();
-	print "ARGV0 = ".$ARGV[0]."\n";
-	open INFILE, "$ARGV[0]" or die "Falta nombre de archivo";
-	while(<INFILE>) {
-#		/^([0-1]+)/ and $line = disassm($1);
-#use Data::Dumper; print Dumper($line);
-		push @l, $line;
-	}
-	close INFILE;
-	return @l;
-}
-
-sub disassm {
-	my $code = shift;
-	my ($inst, $dat) = (substr($code, 0, 3), substr($code, 3));
-	printf "inst %s dat %s\n", $inst, $dat;
-	return "instruccion";
 }
 
 sub makeasm {
@@ -180,29 +158,29 @@ sub execute {
 			$dato = <STDIN>;
 			@MEM[$addr] = dec2bin(8,$dato);
 		} 
-		$A = @MEM[$addr];
+		$A = $MEM[$addr];
 		$PC++;
 
 	}
 	if($inst eq '011') { #ST
 		$addr = addr2dec($data);
 		#printf "A = %s dec2bin = %s \n",$A, dec2bin(8,$A);
-		@MEM[$addr] = dec2bin(8,bin2dec($A));
+		$MEM[$addr] = dec2bin(8,bin2dec($A));
 		$PC++;
 		if($addr eq 31) {
-			printf "SALIDA: %s\n",bin2dec(@MEM[$addr]);
+			printf "SALIDA: %s\n",bin2dec($MEM[$addr]);
 			#$nada = <STDIN>;
 		}
 	}
 	if($inst eq '100') { #ADD
 		$addr = addr2dec($data);
-		$m = bin2dec(@MEM[$addr]);
+		$m = bin2dec($MEM[$addr]);
 		$A = dec2bin(8,bin2dec($A) + $m);
 		$PC++;
 	}
 	if($inst eq '101') { #SUB
 		$addr = addr2dec($data);
-		my $m = bin2dec(@MEM[$addr]);
+		my $m = bin2dec($MEM[$addr]);
 		$A = dec2bin(8,bin2dec($A) - $m);
 		$PC++;
 	}
@@ -265,7 +243,6 @@ sub assemble {
 	my @list = @_;
 	my @p = makeasm(@list);
 
-#use Data::Dumper; print "DUMPER:".Dumper(@p);
 	asm2mem(@p);
 	return @p;
 }
@@ -277,10 +254,10 @@ sub run {
 	my $halt = 0;
 	while($halt == 0) {
 		die "El PC salió de la memoria: $PC" if($PC < 0 || $PC > 31);
-		@p = @{@prog[$PC]};
+		@p = @{$prog[$PC]};
 		print printline(@p) if(defined $v);
 		$nada = <STDIN> if(defined $v);
-		$IR = @MEM[$PC];
+		$IR = $MEM[$PC];
 		$halt = execute($IR);
 		printstatus if (defined $v);
 	}
@@ -291,12 +268,11 @@ sub run {
 #----------------------------------
 
 sub hints {
-	my $msg = "mcbeas [opciones] $ARGV[0] fuente.mcbe | -\n";
+	my $msg = "mcbeas [opciones] $ARGV[0] fuente.asm | -\n";
 	$msg .= "\t-a\tEnsamblar\n";
 	$msg .= "\t-i\tInterpretar\n";
 	$msg .= "\t-v\tVerboso\n";
 	$msg .= "\t-g\tGenerar binario\n";
-#	$msg .= "\t-r\tEjecutar binario\n";
 	die $msg;
 }
 
@@ -304,31 +280,18 @@ if(scalar(@ARGV) == 0) {
 	hints();
 } 
 
-my @lines, @prog;
+my (@lines, @prog);
 
-if(defined $r) {
-#	@lines = readbin;
-#	#@prog = disassm(@lines);
-#	bin2mem(@lines);
-#	run(@prog);
-	@bytes = readbytes;
-	exit;
-} else {
-	@lines = readprog;
- 	@prog = assemble(@lines);
-}
+@lines = readprog;
+@prog = assemble(@lines);
+
 if(defined $a) {
 	printasm(@prog);
-	exit;
-}
-if(defined $g) {
-	print asm2bytes(@prog);
-	exit;
-}
-if(defined $i) {
+} elsif(defined $i) {
 	run(@prog);
-	exit;
-}	
-
-hints();
+} elsif(defined $g) {
+	print asm2bytes(@prog);
+} else {
+	hints();
+}
 

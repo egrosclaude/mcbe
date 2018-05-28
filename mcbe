@@ -1,8 +1,5 @@
 #!/usr/bin/perl -s
 
-$codes = { LD => 2, ST => 3, ADD => 4, SUB => 5, 
-	JMP => 6, JZ => 7, HLT => 1, NOP => 0 };
-$labels = {IN => 30, OUT => 31};
 our @MEM = ();
 our $IR = 0;
 our $PC = 0;
@@ -11,15 +8,15 @@ our $AC = 0;
 
 sub dec2bin {
 	($fld, $num) = @_;   
-    my $str = unpack("B32", pack("N", $num));
-    return substr($str,-$fld);
+	my $str = unpack("B32", pack("N", $num));
+	return substr($str,-$fld);
 }
 
 sub addr2dec {
 	$num = shift;
 	$str = substr("0" x 32 . $num, -32);
-    my $u = unpack("N", pack("B32", $str));
-    return $u;
+	my $u = unpack("N", pack("B32", $str));
+	return $u;
 }
 
 sub bin2dec {
@@ -29,43 +26,6 @@ sub bin2dec {
 		$n -= (length($num) == 8) ? 256 : 32;
 	}
 	return $n;
-}
-
-
-
-
-sub insttobin {
-	($mnem, $arg) = @_;
-	
-#	print "MNEM $mnem ARG $arg\n";
-	$binst = dec2bin(3,$codes->{$mnem});
-	$bdat  = dec2bin(5,$arg);
-	return $binst.$bdat;
-}
-
-sub setlabel 	{ $x = shift; $labels->{$x} = $lnum; }
-sub numarg 	{ ($inst,$arg) = @_; 	return ['NUMARG',	$lnum++,	$inst,	$arg,	""]; }
-sub noarg 	{ $inst = shift; 	return ['NONARG', 	$lnum++,	$inst,	"",	""]; }
-sub lblarg 	{ ($inst,$lbl) = @_; 	return ['LBLARG', 	$lnum++, 	$inst, 	$lbl,	""]; }
-sub data 	{ $data = shift; 	return ['DATA', 	$lnum++, 	"", 	$data,	""]; }
-
-# lee programa en ensamblador
-sub readprog {
-	my @l = ();
-	open INFILE, ("$ARGV0" eq "-") ? STDIN : "$ARGV[0]" or die "Falta nombre de archivo";
-	while(<INFILE>) {
-		/^([A-Z]+[0-9]*):/ and setlabel($1);
-		/^ *\t*([A-Z]+) *$/ and push @l, noarg($1);
-		/^ *\t*([A-Z]+) +(-*[0-9]+)/ and push @l, numarg($1,$2);
-		/^ *\t*([A-Z]+) +([A-Z]+[0-9]*)/ and push @l, lblarg($1,$2);
-		/^ *\t*(-*\d+)/ and push @l, data($1);
-		/^[A-Z]+[0-9]*: *\t*+([A-Z]+) *$/ and push @l, noarg($1);
-		/^[A-Z]+[0-9]*: *\t*+([A-Z]+) +(-*[0-9]+)/ and push @l, numarg($1,$2);
-		/^[A-Z]+[0-9]*: *\t*+([A-Z]+) +([A-Z]+[0-9]*)/ and push @l, lblarg($1,$2);
-		/^[A-Z]+[0-9]*: *\t*(-*\d+)/ and push @l, data($1);
-	}
-	close INFILE;
-	return @l;
 }
 
 # lee programa en codigo maquina
@@ -81,14 +41,6 @@ sub readbytes {
 	#use Data::Dumper; print Dumper(@l);
 	return @l;
 }
-
-sub disassm {
-	my $code = shift;
-	my ($inst, $dat) = (substr($code, 0, 3), substr($code, 3));
-	printf "inst %s dat %s\n", $inst, $dat;
-	return "instruccion";
-}
-
 
 sub printline {
 	my @lista = @_;
@@ -126,7 +78,6 @@ sub asm2bytes {
 	}
 	return $s;
 }
-	
 
 sub execute {
 	$my_IR = shift;
@@ -139,7 +90,7 @@ sub execute {
 	if($inst eq '010') { #LD
 		$addr = addr2dec($data);
 		if($addr == 30) {
-			printf "Ingrese un dato: ";
+			#printf "Ingrese un dato: ";
 			$dato = <STDIN>;
 			@MEM[$addr] = dec2bin(8,$dato);
 		} 
@@ -154,9 +105,13 @@ sub execute {
 		$PC++;
 		if($addr eq 31) {
 			if(defined $A) {
-				printf "SALIDA: %s\n",chr(bin2dec(@MEM[$addr]));
+				printf "%s\n",chr(bin2dec(@MEM[$addr]));
+			} elsif(defined $B) {
+				printf "%s\n",@MEM[$addr];
+			} elsif(defined $H) {
+				printf "%X\n",bin2dec(@MEM[$addr]);
 			} else {
-				printf "SALIDA: %d\n",bin2dec(@MEM[$addr]);
+				printf "%d\n",bin2dec(@MEM[$addr]);
 			}
 			#$nada = <STDIN>;
 		}
@@ -196,7 +151,7 @@ sub execute {
 	return $halt;
 }
 
-# direcciones bajas abajo
+# direcciones bajas abajo:
 #sub printstatus {
 #	foreach $j (0..7) {
 #		foreach $i (7, 15, 23, 31) {
@@ -217,15 +172,6 @@ sub printstatus {
 }
 	
 	
-sub assemble {
-	my @list = @_;
-	my @p = makeasm(@list);
-
-#use Data::Dumper; print "DUMPER:".Dumper(@p);
-	asm2mem(@p);
-	return @p;
-}
-
 # Ciclo de instruccion
 sub run {
 	my @prog = @_;
@@ -255,14 +201,18 @@ sub bytes2bin {
 	}
 	return @bins;
 }
-#----------------------------------
 
 sub hints {
 	my $msg = "mcbe [opciones] $ARGV[0] programa | -\n";
-	$msg .= "\t-v\tVerboso\n";
+# UNDOCUMENTED
+#	$msg .= "\t-v\tVerboso\n";
 	$msg .= "\t-A\tSalida en ASCII\n";
+	$msg .= "\t-B\tSalida en binario\n";
+	$msg .= "\t-H\tSalida en hexadecimal\n";
 	die $msg;
 }
+
+#----------------------------------
 
 if(scalar(@ARGV) == 0) {
 	hints();
@@ -274,5 +224,4 @@ my @lines, @prog, @bins;
 @bins = bytes2bin(@bytes);
 bin2mem(@bins);
 run(@prog);
-exit;
 
