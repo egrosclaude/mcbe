@@ -208,3 +208,13 @@ El programa **mcbeas** es un **ensamblador**, es decir, recibe como entrada un p
 # mcbe
 
 El programa **mcbe** es una **máquina virtual** MCBE, es decir, es un programa que emula el comportamiento que tendría una máquina MCBE si ésta fuera implementada.
+
+# Cómo usar los programas
+
+- Necesitamos una instalación de Linux (o el lenguaje Perl instalado en Windows).
+- wget https://github.com/egrosclaude/mcbe/archive/master.zip
+- unzip master.zip
+- cd mcbe-master
+
+A continuación seguir los ejemplos que se desarrollan en [la animación que aparece más arriba](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5.png)](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5).
+
