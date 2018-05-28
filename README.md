@@ -217,5 +217,5 @@ El programa **mcbe** es una **máquina virtual** MCBE, es decir, es un programa 
 - unzip master.zip
 - cd mcbe-master
 
-A continuación seguir los ejemplos que se desarrollan en [la animación que aparece más arriba](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5).
+A continuación seguir los ejemplos que se desarrollan en [la animación que aparece más arriba](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5). Esta animación se puede detener, reanudar, retroceder, etc.
 
