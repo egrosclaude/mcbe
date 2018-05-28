@@ -186,8 +186,7 @@ sub run {
 		$halt = execute($IR);
 		printstatus if(defined $v);
 	}
-
-	print "Programa Terminado\n";
+	#print "Programa Terminado\n";
 }
 
 sub bytes2bin {

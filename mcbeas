@@ -100,12 +100,21 @@ sub makeasm {
 sub printline {
 	my @lista = @_;
 	my ($nl, $inst, $arg, $bin) = @lista;
-	if($inst =~ /JMP|JZ/) {
-		return sprintf("%2d %4s %+3d %s\n", $nl,$inst,$arg,$bin);
+	if(defined $v) {
+		if($inst =~ /JMP|JZ/) {
+			return sprintf("%2d %4s %+3d %s\n", $nl,$inst,$arg,$bin);
+		} else {
+			return sprintf("%2d %4s %3d %s\n", $nl,$inst,$arg,$bin);
+		}
 	} else {
-		return sprintf("%2d %4s %3d %s\n", $nl,$inst,$arg,$bin);
+		if($inst =~ /JMP|JZ/) {
+			return sprintf("%2d %s\n", $nl,$bin);
+		} else {
+			return sprintf("%2d %s\n", $nl,$bin);
+		}
 	}
 }
+	
 
 sub printasm {
 	my @prog = @_;
@@ -269,6 +278,7 @@ sub run {
 
 sub hints {
 	my $msg = "mcbeas [opciones] $ARGV[0] fuente.asm | -\n";
+	$msg .= "\t-h\tAyuda\n";
 	$msg .= "\t-a\tEnsamblar\n";
 	$msg .= "\t-i\tInterpretar\n";
 	$msg .= "\t-v\tVerboso\n";
@@ -291,6 +301,8 @@ if(defined $a) {
 	run(@prog);
 } elsif(defined $g) {
 	print asm2bytes(@prog);
+} elsif(defined $h) {
+	hints();
 } else {
 	hints();
 }
