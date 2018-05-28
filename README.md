@@ -13,6 +13,13 @@ Scripts para trabajar con el Modelo Computacional Binario Elemental
 
 # mcbecc
 
+Llamamos **Sub-C** a un subconjunto muy básico del lenguaje C, que nos sirve para ilustrar diferencias entre lenguajes de alto y bajo nivel, aspectos de la traducción de programas, diferencias entre compilación e interpretación, etc. 
+
+El programa **mcbecc** es un **traductor** de Sub-C al lenguaje ensamblador, o assembler, de la máquina MCBE.
+
+A continuación describimos el lenguaje Sub-C que es capaz de comprender el programa mcbecc.
+
+
 ## Lenguaje de entrada
 
 ### Programa
@@ -26,6 +33,7 @@ int main()
    ...sentencias...
 }
 ```
+
 
 ### Constantes
 - Únicamente constantes enteras en formato decimal
@@ -191,8 +199,12 @@ int main()
 
 ### Comentarios
 
-- Una línea de comentarios se prefija con doble barra (//)
+- Doble barra (//) al principio de una línea indica que la línea es de comentarios, y será ignorada por el traductor. El programador puede escribir lo que desee en los comentarios para documentar su programa.
+
 # mcbeas
-TODO
+
+El programa **mcbeas** es un **ensamblador**, es decir, recibe como entrada un programa en lenguaje ensamblador, o assembler, del MCBE, y produce a la salida un programa en código de máquina. 
+
 # mcbe
-TODO
+
+El programa **mcbe** es una **máquina virtual** MCBE, es decir, es un programa que emula el comportamiento que tendría una máquina MCBE si ésta fuera implementada.
