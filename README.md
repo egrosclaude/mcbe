@@ -9,8 +9,7 @@ Scripts para trabajar con el Modelo Computacional Binario Elemental
 - [Máquina virtual mcbe](#mcbe)
   Ejecuta programas en código de máquina MCBE
 
-
-[![asciicast](https://asciinema.org/a/Y0fQLbNV1Zd7yAOndrJJOtoI8.png)](https://asciinema.org/a/Y0fQLbNV1Zd7yAOndrJJOtoI8)
+[![asciicast](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5.png)](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5)
 
 # mcbecc
 
