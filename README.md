@@ -212,8 +212,8 @@ El programa **mcbe** es una **máquina virtual** MCBE, es decir, es un programa 
 
 # Cómo usar los programas
 
-- Necesitamos una instalación de Linux (o el lenguaje Perl instalado en Windows).
-- wget https://github.com/egrosclaude/mcbe/archive/master.zip
+- Necesitamos una instalación de Linux (o el lenguaje Perl instalado en Windows). Todo funciona dentro del shell.
+- Descargar https://github.com/egrosclaude/mcbe/archive/master.zip
 - unzip master.zip
 - cd mcbe-master
 
