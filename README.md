@@ -222,7 +222,7 @@ A continuación seguir los ejemplos que se desarrollan en [la animación que apa
 
 ## ¡No tengo Linux!
 
-¿No Linux? ¡No problem! La máquina virtual Linux en Javascript que hemos ofrecido como [recurso de la materia](https://egrosclaude.github.io/IC2017/SistemasOperativos.html#/41) cuenta con un intérprete de Perl que viene de lujo. Solamente hay que ser astuto y saber usar la función de subir archivos. 
+¿No Linux? ¡No problem! La [máquina virtual Linux en Javascript](https://egrosclaude.github.io/IC2017/SistemasOperativos.html#/41) que hemos ofrecido como recurso de la materia cuenta con un intérprete de Perl que viene de lujo. Solamente hay que ser astuto y saber usar la función de subir archivos. 
 
 Para usar estos programas en esa máquina virtual:
 
