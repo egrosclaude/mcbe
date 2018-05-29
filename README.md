@@ -212,10 +212,29 @@ El programa **mcbe** es una **máquina virtual** MCBE, es decir, es un programa 
 
 # Cómo usar los programas
 
-- Necesitamos una instalación de Linux (o el lenguaje Perl instalado en Windows). Todo funciona dentro del shell.
+- Necesitamos una instalación de Linux (o el lenguaje Perl instalado en Windows). 
 - Descargar https://github.com/egrosclaude/mcbe/archive/master.zip
+- A partir de aquí todo funciona dentro del shell.
 - unzip master.zip
 - cd mcbe-master
 
 A continuación seguir los ejemplos que se desarrollan en [la animación que aparece más arriba](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5). Esta animación se puede detener, reanudar, retroceder, etc.
+
+## ¡No tengo Linux!
+
+¿No Linux? ¡No problem! La máquina virtual Linux en Javascript que hemos ofrecido como [recurso de la materia] (https://egrosclaude.github.io/IC2017/SistemasOperativos.html#/41) cuenta con un intérprete de Perl que viene de lujo. Solamente hay que ser astuto y saber usar la función de subir archivos. 
+
+Para usar estos programas en esa máquina virtual:
+
+- Descargar https://github.com/egrosclaude/mcbe/archive/master.zip en nuestra máquina (no importa si no tenemos Linux)
+- unzip master.zip
+- Ingresar a la [máquina virtual Linux](https://egrosclaude.github.io/IC2017/SistemasOperativos.html#/41)
+- Pulsar el botón de **upload** o subir archivos que está junto a la cajita "Paste Here". 
+- Elegir los archivos mcbe, mcbecc y mcbeas de nuestro directorio mcbe-master y subirlos a la máquina virtual. El resto del trabajo se puede hacer dentro de la máquina virtual.
+- Ponerles atributo de ejecutable a los tres programas con el comando ```chmod a+x mcbe*```.
+- Opcionalmente también se pueden subir programas de ejemplo, pero son cortos y también se pueden tipear o editar con ```nano```.
+- Como antes, seguir los ejemplos sugeridos en la animación mencionada. Inventar algo.
+
+
+
 
