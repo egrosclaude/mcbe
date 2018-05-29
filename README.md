@@ -217,8 +217,8 @@ El programa **mcbe** es una **máquina virtual** MCBE, es decir, es un programa 
 - A partir de aquí todo funciona dentro del shell.
 - unzip master.zip
 - cd mcbe-master
-
-A continuación seguir los ejemplos que se desarrollan en [la animación que aparece más arriba](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5). Esta animación se puede detener, reanudar, retroceder, etc.
+- Seguir los ejemplos que se desarrollan en [la animación que aparece más arriba](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5). Esta animación se puede detener, reanudar, retroceder, etc.
+- Intentar crear otros programas. ¡Ver qué pasa!
 
 ## ¡No tengo Linux!
 
@@ -233,7 +233,7 @@ Para usar estos programas en esa máquina virtual:
 - Elegir los archivos mcbe, mcbecc y mcbeas de nuestro directorio mcbe-master y subirlos a la máquina virtual. El resto del trabajo se puede hacer dentro de la máquina virtual.
 - Ponerles atributo de ejecutable a los tres programas con el comando ```chmod a+x mcbe*```.
 - Opcionalmente también se pueden subir programas de ejemplo, pero son cortos y también se pueden tipear o editar con ```nano```.
-- Como antes, seguir los ejemplos sugeridos en [la animación mencionada](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5). Inventar algo.
+- Como antes, seguir los ejemplos sugeridos en [la animación mencionada](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5). ¡Inventar algo!
 
 
 
