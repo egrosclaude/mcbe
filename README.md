@@ -227,7 +227,7 @@ A continuación seguir los ejemplos que se desarrollan en [la animación que apa
 Para usar estos programas en esa máquina virtual:
 
 - Descargar https://github.com/egrosclaude/mcbe/archive/master.zip en nuestra máquina (no importa si no tenemos Linux)
-- unzip master.zip
+- Descomprimir master.zip
 - Ingresar a la [máquina virtual Linux](https://egrosclaude.github.io/IC2017/SistemasOperativos.html#/41)
 - Pulsar el botón de **upload** o subir archivos que está junto a la cajita "Paste Here". 
 - Elegir los archivos mcbe, mcbecc y mcbeas de nuestro directorio mcbe-master y subirlos a la máquina virtual. El resto del trabajo se puede hacer dentro de la máquina virtual.
