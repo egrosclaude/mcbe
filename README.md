@@ -229,7 +229,7 @@ Para usar estos programas en esa máquina virtual:
 - Descargar https://github.com/egrosclaude/mcbe/archive/master.zip en nuestra máquina (no importa si no tenemos Linux)
 - Descomprimir master.zip
 - Ingresar a la [máquina virtual Linux](https://egrosclaude.github.io/IC2017/SistemasOperativos.html#/41)
-- Pulsar el botón de **upload** o subir archivos que está junto a la cajita "Paste Here". 
+- Pulsar el botón de **upload** o subir archivos que está junto a la cajita "Paste Here". No se ve bien debido al fondo negro, pero está ahí.
 - Elegir los archivos mcbe, mcbecc y mcbeas de nuestro directorio mcbe-master y subirlos a la máquina virtual. El resto del trabajo se puede hacer dentro de la máquina virtual.
 - Ponerles atributo de ejecutable a los tres programas con el comando ```chmod a+x mcbe*```.
 - Opcionalmente también se pueden subir programas de ejemplo, pero son cortos y también se pueden tipear o editar con ```nano```.
