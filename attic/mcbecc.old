@@ -11,8 +11,8 @@ my $lastconst = 0;
 my $lastcond = 0; 
 
 my ($main, $endmain) = (0,0);
-
-my @conds = ();
+my $inwhile = 0;
+my $inif = 0;
 
 
 /^\/\// and next;
@@ -34,12 +34,12 @@ my @conds = ();
 /^\s*in\(&([[:alpha:]]+\d*)\)\s*;\s*$/ and in($1);
 /^\s*out\(([[:alpha:]]+\d*)\)\s*;\s*$/ and out($1);
 
-/^\s*while\s*\(([[:alpha:]]+\d*)\s*\!=\s*(-*\d+)\)\s*{\s*$/ and while1begin($1,$2); # while(a != 2)
-/^\s*while\s*\(([[:alpha:]]+\d*)\s*\!=\s*([[:alpha:]]+\d*)\)\s*{\s*$/ and while2begin($1,$2); # while(a != b)
+/^\s*while\(([[:alpha:]]+\d*)\s*\!=\s*(-*\d+)\)\s*{\s*$/ and while1begin($1,$2); # while(a != 2)
+/^\s*while\(([[:alpha:]]+\d*)\s*\!=\s*([[:alpha:]]+\d*)\)\s*{\s*$/ and while2begin($1,$2); # while(a != b)
 /^\s*}/ and condend();
 
-/^\s*if\s*\(([[:alpha:]]+\d*)\s*\!=\s*(-*\d+)\)\s*{\s*$/ and if1begin($1,$2); # if(a != 2)
-/^\s*if\s*\(([[:alpha:]]+\d*)\s*\!=\s*([[:alpha:]]+\d*)\)\s*{\s*$/ and if2begin($1,$2); # if(a != b)
+/^\s*if\(([[:alpha:]]+\d*)\s*\!=\s*(-*\d+)\)\s*{\s*$/ and if1begin($1,$2); # if(a != 2)
+/^\s*if\(([[:alpha:]]+\d*)\s*\!=\s*([[:alpha:]]+\d*)\)\s*{\s*$/ and if2begin($1,$2); # if(a != b)
 
 /^\s*printf\(\"([^)]*)\"\)\s*;\s*$/ and printstring($1);
 
@@ -108,8 +108,7 @@ sub if1begin {# if(a != 2)
 		"\tSUB $dato",
 		"\tJZ $conde"
 	);
-	push @conds, "$conde:\tNOP";
-	$lastcond++;
+	$inif = 1;
 }
 
 sub if2begin {# if(a != b)
@@ -124,8 +123,7 @@ sub if2begin {# if(a != b)
 		(sprintf "\tSUB %s", uc($k2)),
 		"\tJZ $conde"
 	);
-	push @conds, "$conde:\tNOP";
-	$lastcond++;
+	$inif = 1;
 }
 
 sub while1begin {# while(a != 2)
@@ -143,10 +141,10 @@ sub while1begin {# while(a != 2)
 		"\tSUB $dato",
 		"\tJZ $loope"
 	);
-	push @conds, "\tJMP $loopb\n$loope:\tNOP";
-	$lastcond++;
+	$inwhile = 1;
 }
 
+# TODO: lazos no pueden ser anidados - apilar lastcond
 sub while2begin {# while(a != b)
 	my ($k1, $k2) = @_;
 	
@@ -160,17 +158,34 @@ sub while2begin {# while(a != b)
 		(sprintf "\tSUB %s", uc($k2)),
 		"\tJZ $loope"
 	);
-	push @conds, "\tJMP $loopb\n$loope:\tNOP";
-	$lastcond++;
+	$inwhile = 1;
 }
 
 sub condend {
-	my $ends = pop @conds;
-	if(defined $ends) {
-		push @prog, $ends;
-	} else {
-		setmain(0); # } cierra main
+	if($inwhile) {
+		$inwhile = 0;
+		my $loopb = "LAZO".$lastcond;
+		my $loope = "FIN".$lastcond;
+		push @prog, (
+			"\tJMP $loopb",
+			"$loope:\tNOP"
+		);
+		$lastcond++;
+		return;
 	}
+
+	if($inif) {
+		$inif = 0;
+		my $conde = "COND".$lastcond;
+		push @prog, (
+			"$conde:\tNOP"
+		);
+		$lastcond++;
+		return;
+	}
+	
+	setmain(0); # } cierra main
+	
 }
 
 sub in {

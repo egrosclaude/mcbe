@@ -1,4 +1,8 @@
 int main()
 {
-	printf("Hola Mundo");
+	int a = 0;
+	while(a != 10) {
+		printf("A");
+		a++;
+	}
 }
