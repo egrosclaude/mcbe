@@ -195,7 +195,7 @@ int main()
 
 ## Sentencias de control
 
-Se proveen las sentencias de control if() y while(). No pueden anidarse.
+Se proveen las sentencias de control if() y while(). 
 - Las condiciones de control para ambas construcciones pueden ser:
     - La comparación por diferencia (!=) entre una variable y una constante.
     - La comparación por diferencia (!=) entre dos variables.
@@ -224,16 +224,37 @@ int main()
 
 
 ```
+// Calcula e imprime la suma de 1 a 10
 int main()
 {
-	int a;
-	int b;
+	int a = 1;
+	int b = 0;
 
-	while(a != 10) {
+	while(a != 11) {
 		b = b + a;
 		a++;
 	}
 	out(b);
+}
+```
+### Anidamiento de sentencias de control
+
+Las sentencias de control pueden anidarse, pero la traducción a ensamblador puede producir saltos con desplazamiento mayor del permitido (en MCBE, el rango de desplazamiento para los saltos relativos es \[-16, 15]).
+```
+// Pide tres datos y los imprime, 
+// excepto que el dato sea 0
+int main()
+{
+	int a = 0;
+	int b;
+
+	while(a != 3) {
+		in(&b);
+		if(b != 0) {
+			out(b);
+		}
+		a++;
+	}
 }
 ```
 
