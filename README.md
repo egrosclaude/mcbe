@@ -22,6 +22,7 @@ Una descripción completa del MCBE puede estudiarse en el [material de dicha asi
   - [Instalación en Linux](#instalación-en-linux)
   - [¡No tengo Linux!](#no-tengo-linux)
   - [Uso de los programas en línea de comandos](#uso-de-los-programas-en-línea-de-comandos)
+- [Un video de cómo trabajar](#un-video-de-cómo-trabajar)
 - [Sub-C](#sub-c)
   Subconjunto restringido del lenguaje C
 ----
