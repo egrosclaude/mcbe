@@ -103,6 +103,7 @@ El símbolo para indicar entubamiento de comandos es **|** (que suele leerse "pi
 Nuestros programas para trabajar con MCBE generan salida que sirve como entrada para los otros programas. El programa mcbecc genera assembler que tomará mcbeas, y mcbeas genera código ejecutable que tomará mcbe.
 
 - Así, podemos encadenar la traducción, el ensamblado y la ejecución, todo en un solo comando:
+
 ```./mcbecc prog.c | ./mcbeas -g - | ./mcbe - ```. 
 
 El símbolo **-** significa que la entrada de los comandos mcbeas y mcbe no debe ser tomada de un archivo sino de la tubería.
