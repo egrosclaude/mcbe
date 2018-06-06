@@ -240,6 +240,9 @@ int main()
 ### Anidamiento de sentencias de control
 
 Las sentencias de control pueden anidarse, pero la traducción a ensamblador puede producir fácilmente programas que ocupen más memoria de la disponible (en MCBE, solamente se pueden ocupar las posiciones 0 a 29) o que tengan saltos con desplazamiento mayor del permitido (en MCBE, el rango de desplazamiento para los saltos relativos es \[-16, 15]).
+
+Una **posible** solución es optimizar a mano el código assembler producido.
+
 ```
 // Pide tres datos y los imprime, 
 // excepto que el dato sea 0
