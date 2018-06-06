@@ -109,7 +109,7 @@ El símbolo **-** significa que la entrada de los comandos mcbeas y mcbe no debe
 
 ![pipeline.svg](/img/pipeline.svg)
 
-Como en este caso la entrada está siendo tomada de la tubería, el programa mcbe no puede recibir entrada de usuario, que está operando el teclado. Las condiciones (\*) son que los programas no pidan entrada de usuario.
+Como en este caso la entrada está siendo tomada de la tubería, el programa mcbe no puede recibir entrada del usuario, que está operando el teclado. Las condiciones (\*) son que los programas no pidan entrada de usuario.
 
 ----
 
