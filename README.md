@@ -2,6 +2,12 @@
 Programas para trabajar con el Modelo Computacional Binario Elemental
 
 ----
+# Qué es el Modelo Computacional Binario Elemental
+Es una máquina de programa almacenado, **teórica y minimalista**, que cuenta con una CPU, una memoria y órganos de entrada/salida. Su finalidad es introducir a temas de Organización y Arquitectura de Computadoras para alumnos de primer año de Licenciaturas en Ciencias de la Computación y afines, de la Universidad Nacional del Comahue. Forma parte del material didáctico de la asignatura [Introducción a la Computación](http://pedco.uncoma.edu.ar/course/view.php?id=1553).
+
+Una descripción completa del MCBE puede estudiarse en el [material de dicha asignatura](https://egrosclaude.github.io/IC2017/ArquitecturaDeComputadoras.html).
+
+----
 - [Máquina virtual mcbe](#mcbe)
   Ejecuta programas en código de máquina MCBE
 - [Ensamblador mcbeas](#mcbeas)
@@ -14,17 +20,7 @@ Programas para trabajar con el Modelo Computacional Binario Elemental
   - [Uso de los programas en línea de comandos](#uso-de-los-programas-en-línea-de-comandos)
 - [Sub-C](#sub-c)
   Subconjunto restringido del lenguaje C
-
-# Qué es el Modelo Computacional Binario Elemental
-Es una máquina de programa almacenado, **teórica y minimalista**, que cuenta con una CPU, una memoria y órganos de entrada/salida. Su finalidad es introducir a temas de Organización y Arquitectura de Computadoras para alumnos de primer año de Licenciaturas en Ciencias de la Computación y afines, de la Universidad Nacional del Comahue. Forma parte del material didáctico de la asignatura [Introducción a la Computación](http://pedco.uncoma.edu.ar/course/view.php?id=1553).
-
-Una descripción completa del MCBE puede estudiarse en el [material de dicha asignatura](https://egrosclaude.github.io/IC2017/ArquitecturaDeComputadoras.html).
-
-
-# Un video de cómo trabajar
-
-[![asciicast](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5.png)](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5)
-
+----
 # Los programas
 ## mcbe
 
@@ -48,7 +44,7 @@ El programa **mcbecc** es un **traductor** de Sub-C (un subconjunto de C) al len
 - A partir de aquí todo funciona dentro del shell.
 - unzip master.zip
 - cd mcbe-master
-- Seguir los ejemplos que se desarrollan en [la animación que aparece más arriba](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5). Esta animación se puede detener, reanudar, retroceder, etc.
+- Seguir los ejemplos que se desarrollan en [la animación](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5). Esta animación se puede detener, reanudar, retroceder, etc.
 - Intentar crear otros programas. ¡Ver qué pasa!
 
 ## ¡No tengo Linux!
@@ -64,7 +60,7 @@ Para usar estos programas en esa máquina virtual:
 - Elegir los archivos mcbe, mcbecc y mcbeas de nuestro directorio mcbe-master y subirlos a la máquina virtual. El resto del trabajo se puede hacer dentro de la máquina virtual.
 - Ponerles atributo de ejecutable a los tres programas con el comando ```chmod a+x mcbe*```.
 - Opcionalmente también se pueden subir los programas de ejemplo, pero como son muy cortos también se pueden tipear (con ```cat > archivo``` o editar (con ```nano archivo```).
-- Como antes, seguir los ejemplos sugeridos en [la animación mencionada](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5).
+- Como antes, seguir los ejemplos sugeridos en [la animación](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5).
 
 ## Uso de los programas en línea de comandos
 
@@ -104,6 +100,11 @@ Para usar estos programas en esa máquina virtual:
 
 ----
 
+# Un video de cómo trabajar
+
+[![asciicast](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5.png)](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5)
+
+----
 ## Sub-C
 
 Llamamos **Sub-C** a un subconjunto muy básico del lenguaje C, que nos sirve para ilustrar diferencias entre lenguajes de alto y bajo nivel, aspectos de la traducción de programas, diferencias entre compilación e interpretación, etc. 
