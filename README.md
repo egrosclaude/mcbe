@@ -10,6 +10,8 @@ Es una máquina de programa almacenado, **teórica y minimalista**, que cuenta c
 Una descripción completa del MCBE puede estudiarse en el [material de dicha asignatura](https://egrosclaude.github.io/IC2017/ArquitecturaDeComputadoras.html).
 
 ----
+# Contenidos
+
 - [Máquina virtual mcbe](#mcbe)
   Ejecuta programas en código de máquina MCBE
 - [Ensamblador mcbeas](#mcbeas)
