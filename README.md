@@ -5,6 +5,8 @@ Programas para trabajar con el Modelo Computacional Binario Elemental
 # Qué es el Modelo Computacional Binario Elemental
 Es una máquina de programa almacenado, **teórica y minimalista**, que cuenta con una CPU, una memoria y órganos de entrada/salida. Su finalidad es introducir a temas de Organización y Arquitectura de Computadoras para alumnos de primer año de Licenciaturas en Ciencias de la Computación y afines, de la Universidad Nacional del Comahue. Forma parte del material didáctico de la asignatura [Introducción a la Computación](http://pedco.uncoma.edu.ar/course/view.php?id=1553).
 
+![MCBE](https://egrosclaude.github.io/IC2017/img/MCBE.svg)
+
 Una descripción completa del MCBE puede estudiarse en el [material de dicha asignatura](https://egrosclaude.github.io/IC2017/ArquitecturaDeComputadoras.html).
 
 ----
