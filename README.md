@@ -10,7 +10,7 @@ Scripts para trabajar con el Modelo Computacional Binario Elemental
   Traductor sub-C a ensamblador para la máquina MCBE
 - [Cómo usar los programas](#cómo-usar-los-programas)
   - [Instalación en Linux](#Instalación-en-Linux)
-  - [¡No tengo Linux!](#!no-tengo-linux!)
+  - [¡No tengo Linux!](#¡no-tengo-linux!)
   - [Uso de los programas en línea de comandos](#uso-de-los-programas-en-línea-de-comandos)
 - [Sub-C](#sub-c)
   Subconjunto restringido del lenguaje C
