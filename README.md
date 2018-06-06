@@ -71,11 +71,18 @@ Para usar estos programas en esa máquina virtual:
 - El comando ```./mcbe prog.exe``` ejecutará el programa prog.exe. 
 - Si el cursor se detiene sin imprimir nada, es posible que la máquina virtual esté ejecutando una operación LD IN (entrada de usuario), por lo cual el usuario debe introducir un dato en decimal.
 
+### Para ensamblar un programa en ensamblador
+- El comando ```./mcbeas -a prog.asm``` mostrará por pantalla los códigos de instrucciones equivalentes a los mnemónicos pero en formato de números binarios.
+- El comando ```./mcbeas -a -v prog.asm``` mostrará por pantalla la misma lista pero con mnemónicos y números de línea.
+
+### Para interpretar un programa en ensamblador
+- El comando ```./mcbeas -i -v prog.asm``` interpretará el programa en ensamblador, mostrando a cada paso el estado de la máquina con sus registros y memoria.
+
 ### Para encadenar operaciones
 - En ciertas condiciones (\*) es posible realizar más de un paso de los anteriores en forma encadenada gracias a la capacidad de **entubamiento** o **pipelining** del shell de Linux. 
 - El símbolo para indicar entubamiento de comandos es **|**. En el comando ```ls | more```, por ejemplo, este símbolo dice que la salida del comando ls (la lista de nombres y atributos de los archivos) sea introducida como entrada del comando ```more``` (paginar). De esta manera, cuando la lista de archivos es muy larga, la vemos paginada.
 - Nuestros programas para trabajar con MCBE generan salida que sirve como entrada para los otros programas. El programa mcbecc genera assembler que tomará mcbeas, y mcbeas genera código ejecutable que tomará mcbe.
-- Así, podemos encadenar la traducción, el ensamblado y la ejecución, todo en un solo comando, así:
+- Así, podemos encadenar la traducción, el ensamblado y la ejecución, todo en un solo comando:
 ```./mcbecc prog.c | ./mcbeas -g - | ./mcbe - ```. El símbolo **-** significa que la entrada de los comandos mcbeas y mcbe no debe ser tomada de un archivo sino de la tubería.
 - Como en este caso la entrada está siendo tomada de la tubería, el programa mcbe no puede recibir entrada de usuario, que está operando el teclado. Las condiciones (\*) son que los programas no pidan entrada de usuario.
 
