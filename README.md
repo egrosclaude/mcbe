@@ -29,6 +29,7 @@ El programa **mcbecc** es un **traductor** de Sub-C (un subconjunto de C) al len
 ----
 
 # Cómo usar los programas
+## Instalación en Linux
 
 - Necesitamos una instalación de Linux (o el lenguaje Perl instalado en Windows). 
 - Descargar https://github.com/egrosclaude/mcbe/archive/master.zip
@@ -50,8 +51,30 @@ Para usar estos programas en esa máquina virtual:
 - Pulsar el botón de **upload** o subir archivos que está junto a la cajita "Paste Here". No se ve bien debido al fondo negro, pero está ahí.
 - Elegir los archivos mcbe, mcbecc y mcbeas de nuestro directorio mcbe-master y subirlos a la máquina virtual. El resto del trabajo se puede hacer dentro de la máquina virtual.
 - Ponerles atributo de ejecutable a los tres programas con el comando ```chmod a+x mcbe*```.
-- Opcionalmente también se pueden subir programas de ejemplo, pero son cortos y también se pueden tipear o editar con ```nano```.
+- Opcionalmente también se pueden subir los programas de ejemplo, pero como son muy cortos también se pueden tipear o editar con ```nano```.
 - Como antes, seguir los ejemplos sugeridos en [la animación mencionada](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5). ¡Inventar algo!
+
+## Uso de los programas en línea de comandos
+
+### Para traducir un programa en C a ensamblador
+- El comando ```./mcbecc prog.c``` mostrará por pantalla los mnemónicos de ensamblador MCBE equivalentes al programa en C. 
+- El comando ```./mcbecc prog.c > prog.asm``` guardará esos mismos mnemónicos en un archivo llamado prog.asm
+
+### Para generar código ejecutable para MCBE a partir de ensamblador
+- El comando ```./mcbeas -g prog.asm``` mostrará por pantalla los códigos de instrucciones MCBE equivalentes al programa en ensamblador.
+- El comando ```./mcbeas -g prog.asm > prog.exe``` guardará esos mismos códigos de instrucciones en un archivo llamado prog.exe.
+
+### Para ejecutar un programa en la máquina virtual MCBE
+- El comando ```./mcbe prog.exe``` ejecutará el programa prog.exe. 
+- Si el cursor se detiene sin imprimir nada, es posible que la máquina virtual esté ejecutando una operación LD IN (entrada de usuario), por lo cual el usuario debe introducir un dato en decimal.
+
+### Para encadenar operaciones
+- En ciertas condiciones (\*) es posible realizar más de un paso de los anteriores en forma encadenada gracias a la capacidad de **entubamiento** o **pipelining** del shell de Linux. 
+- El símbolo para indicar entubamiento de comandos es **|**. En el comando ```ls | more```, por ejemplo, este símbolo dice que la salida del comando ls (la lista de nombres y atributos de los archivos) sea introducida como entrada del comando ```more``` (paginar). De esta manera, cuando la lista de archivos es muy larga, la vemos paginada.
+- Nuestros programas para trabajar con MCBE generan salida que sirve como entrada para los otros programas. El programa mcbecc genera assembler que tomará mcbeas, y mcbeas genera código ejecutable que tomará mcbe.
+- Así, podemos encadenar la traducción, el ensamblado y la ejecución, todo en un solo comando, así:
+```./mcbecc prog.c | ./mcbeas -g - | ./mcbe - ```. El símbolo **-** significa que la entrada de los comandos mcbeas y mcbe no debe ser tomada de un archivo sino de la tubería.
+- Como en este caso la entrada está siendo tomada de la tubería, el programa mcbe no puede recibir entrada de usuario, que está operando el teclado. Las condiciones (\*) son que los programas no pidan entrada de usuario.
 
 ----
 
