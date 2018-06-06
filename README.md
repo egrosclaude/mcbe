@@ -47,8 +47,8 @@ El programa **mcbecc** es un **traductor** de Sub-C (un subconjunto de C) al len
 - Necesitamos una instalación de Linux (o el lenguaje Perl instalado en Windows). 
 - Descargar https://github.com/egrosclaude/mcbe/archive/master.zip
 - A partir de aquí todo funciona dentro del shell.
-- unzip master.zip
-- cd mcbe-master
+- ```unzip master.zip```.
+- ```cd mcbe-master```.
 - Seguir los ejemplos que se desarrollan en [la animación](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5). Esta animación se puede detener, reanudar, retroceder, etc.
 - Intentar crear otros programas. ¡Ver qué pasa!
 
