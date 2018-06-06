@@ -1,5 +1,5 @@
 # MCBE: Modelo Computacional Binario Elemental
-Scripts para trabajar con el Modelo Computacional Binario Elemental
+Programas para trabajar con el Modelo Computacional Binario Elemental
 
 ----
 - [Máquina virtual mcbe](#mcbe)
@@ -15,17 +15,25 @@ Scripts para trabajar con el Modelo Computacional Binario Elemental
 - [Sub-C](#sub-c)
   Subconjunto restringido del lenguaje C
 
+# Qué es el Modelo Computacional Binario Elemental
+Es una máquina de programa almacenado, **teórica y minimal**, que cuenta con una CPU, una memoria y órganos de entrada/salida. Su finalidad es introducir a temas de Organización y Arquitectura de Computadoras para alumnos de primer año de Licenciaturas en Ciencias de la Computación y afines. Forma parte del material didáctico de la asignatura Introducción a la Computación.
+
+Una descripción completa del MCBE puede estudiarse en el [material de dicha asignatura](https://egrosclaude.github.io/IC2017/ArquitecturaDeComputadoras.html).
+
+# Un video de cómo trabajar
+
 [![asciicast](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5.png)](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5)
 
-# mcbe
+# Los programas
+## mcbe
 
 El programa **mcbe** es una **máquina virtual** MCBE, es decir, es un programa que emula el comportamiento que tendría una máquina MCBE si ésta fuera implementada.
 
-# mcbeas
+## mcbeas
 
 El programa **mcbeas** es un **ensamblador**, es decir, recibe como entrada un programa en lenguaje ensamblador, o assembler, del MCBE, y produce a la salida un programa en código de máquina. 
 
-# mcbecc
+## mcbecc
 
 El programa **mcbecc** es un **traductor** de Sub-C (un subconjunto de C) al lenguaje ensamblador, o assembler, de la máquina MCBE.
 
@@ -44,18 +52,18 @@ El programa **mcbecc** es un **traductor** de Sub-C (un subconjunto de C) al len
 
 ## ¡No tengo Linux!
 
-¿No Linux? ¡No problem! La [máquina virtual Linux en Javascript](https://egrosclaude.github.io/IC2017/SistemasOperativos.html#/41) que hemos ofrecido como recurso de la materia cuenta con un intérprete de Perl que viene de lujo. Solamente hay que ser astuto y saber usar la función de subir archivos. 
+¿No Linux? ¡No problem! La [máquina virtual Linux en Javascript](https://egrosclaude.github.io/IC2017/SistemasOperativos.html#/41) que hemos ofrecido como recurso de la materia cuenta con un intérprete de Perl que viene de lujo. Solamente hay que ser astutos y saber usar la función de subir archivos. 
 
 Para usar estos programas en esa máquina virtual:
 
-- Descargar https://github.com/egrosclaude/mcbe/archive/master.zip en nuestra máquina (no importa si no tenemos Linux)
-- Descomprimir master.zip
-- Ingresar a la [máquina virtual Linux](https://egrosclaude.github.io/IC2017/SistemasOperativos.html#/41)
+- Descargar https://github.com/egrosclaude/mcbe/archive/master.zip en nuestra máquina.
+- Descomprimir master.zip.
+- Ingresar a la [máquina virtual Linux](https://egrosclaude.github.io/IC2017/SistemasOperativos.html#/41).
 - Pulsar el botón de **upload** o subir archivos que está junto a la cajita "Paste Here". No se ve bien debido al fondo negro, pero está ahí.
 - Elegir los archivos mcbe, mcbecc y mcbeas de nuestro directorio mcbe-master y subirlos a la máquina virtual. El resto del trabajo se puede hacer dentro de la máquina virtual.
 - Ponerles atributo de ejecutable a los tres programas con el comando ```chmod a+x mcbe*```.
-- Opcionalmente también se pueden subir los programas de ejemplo, pero como son muy cortos también se pueden tipear o editar con ```nano```.
-- Como antes, seguir los ejemplos sugeridos en [la animación mencionada](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5). ¡Inventar algo!
+- Opcionalmente también se pueden subir los programas de ejemplo, pero como son muy cortos también se pueden tipear (con ```cat > archivo``` o editar (con ```nano archivo```).
+- Como antes, seguir los ejemplos sugeridos en [la animación mencionada](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5).
 
 ## Uso de los programas en línea de comandos
 
