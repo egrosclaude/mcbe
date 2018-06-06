@@ -70,6 +70,7 @@ Para usar estos programas en esa máquina virtual:
 ### Para ejecutar un programa en la máquina virtual MCBE
 - El comando ```./mcbe prog.exe``` ejecutará el programa prog.exe. 
 - Si el cursor se detiene sin imprimir nada, es posible que la máquina virtual esté ejecutando una operación LD IN (entrada de usuario), por lo cual el usuario debe introducir un dato en decimal.
+- Si el programa emite información por la salida (instrucción ST OUT), es posible que se desee imprimir esa información en diferentes formatos. Las opciones -A, -H y -B hacen que la salida se vea en formato ASCII, hexadecimal y binario, respectivamente.
 
 ### Para ensamblar un programa en ensamblador
 - El comando ```./mcbeas -a prog.asm``` mostrará por pantalla los códigos de instrucciones equivalentes a los mnemónicos pero en formato de números binarios.
