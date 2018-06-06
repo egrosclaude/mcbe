@@ -11,13 +11,13 @@ En el [material de dicha asignatura](https://egrosclaude.github.io/IC2017/Arquit
 
 ----
 # Contenidos
-
-- [Máquina virtual mcbe](#mcbe)
-  Ejecuta programas en código de máquina MCBE
-- [Ensamblador mcbeas](#mcbeas)
-  Ensamblador e intérprete para la máquina MCBE
-- [Traductor mcbecc](#mcbecc)
-  Traductor sub-C a ensamblador para la máquina MCBE
+- [Los programas](#los-programas)
+   - [Máquina virtual mcbe](#mcbe)
+   Ejecuta programas en código de máquina MCBE
+  - [Ensamblador mcbeas](#mcbeas)
+   Ensamblador e intérprete para la máquina MCBE
+  - [Traductor mcbecc](#mcbecc)
+   Traductor sub-C a ensamblador para la máquina MCBE
 - [Cómo usar los programas](#cómo-usar-los-programas)
   - [Instalación en Linux](#instalación-en-linux)
   - [¡No tengo Linux!](#no-tengo-linux)
