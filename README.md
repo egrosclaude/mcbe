@@ -138,8 +138,11 @@ int main()
 ```
 
 
-### Constantes
+### Constantes numéricas
 - Únicamente constantes enteras en formato decimal
+
+### Constantes de cadena o strings
+- Caracteres ASCII entre comillas dobles
 
 ### Variables
 
