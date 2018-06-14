@@ -49,7 +49,7 @@ El programa **mcbecc** es un **traductor** de Sub-C (un subconjunto de C) al len
 - A partir de aquí todo funciona dentro del shell.
 - ```unzip master.zip```.
 - ```cd mcbe-master```.
-- Seguir los ejemplos que se desarrollan en [la animación](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5). 
+- Seguir los ejemplos que se desarrollan en [la animación](#un-video-de-cómo-trabajar). 
 - Intentar crear otros programas. ¡Ver qué pasa!
 
 ## ¡No tengo Linux!
@@ -65,7 +65,7 @@ Para usar estos programas en esa máquina virtual:
 - Elegir los archivos mcbe, mcbecc y mcbeas de nuestro directorio mcbe-master y subirlos a la máquina virtual. El resto del trabajo se puede hacer dentro de la máquina virtual.
 - Ponerles atributo de ejecutable a los tres programas con el comando ```chmod a+x mcbe*```.
 - Opcionalmente también se pueden subir los programas de ejemplo, pero como son muy cortos también se pueden tipear (con ```cat > archivo``` o editar (con ```nano archivo```).
-- Como antes, seguir los ejemplos sugeridos en [la animación](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5).
+- Como antes, seguir los ejemplos sugeridos en [la animación](#un-video-de-cómo-trabajar).
 
 ## Uso de los programas en línea de comandos
 
@@ -116,7 +116,7 @@ Como en este caso la entrada está siendo tomada de la tubería, el programa mcb
 
 # Un video de cómo trabajar
 
-Esta animación se puede detener, reanudar, retroceder, etc. usando la barra de control al pie de la ventana. Se puede avanzar paso a paso con las teclas de las flechas.
+Esta animación se puede detener, reanudar, retroceder, etc. usando la barra de control al pie de la ventana. Se puede avanzar o retroceder paso a paso con las teclas de las flechas.
 
 [![asciicast](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5.png)](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5)
 
