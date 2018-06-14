@@ -49,7 +49,7 @@ El programa **mcbecc** es un **traductor** de Sub-C (un subconjunto de C) al len
 - A partir de aquí todo funciona dentro del shell.
 - ```unzip master.zip```.
 - ```cd mcbe-master```.
-- Seguir los ejemplos que se desarrollan en [la animación](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5). Esta animación se puede detener, reanudar, retroceder, etc.
+- Seguir los ejemplos que se desarrollan en [la animación](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5). 
 - Intentar crear otros programas. ¡Ver qué pasa!
 
 ## ¡No tengo Linux!
@@ -70,14 +70,15 @@ Para usar estos programas en esa máquina virtual:
 ## Uso de los programas en línea de comandos
 
 ### Para traducir un programa en C a ensamblador
-- El comando ```./mcbecc prog.c``` mostrará por pantalla los mnemónicos de ensamblador MCBE equivalentes al programa en C. 
-- El comando ```./mcbecc prog.c > prog.asm``` guardará esos mismos mnemónicos en un archivo llamado prog.asm
+- El comando ```./mcbecc prog.c``` mostrará por pantalla los mnemónicos de ensamblador MCBE equivalentes al programa en lenguaje C. 
+- El comando ```./mcbecc prog.c > prog.asm``` guardará esos mismos mnemónicos en un archivo llamado prog.asm, que estará en lenguaje ensamblador del MCBE.
+- La sintaxis del subconjunto del lenguaje C admitida por mcbecc se describe en la sección [Sub-C](#sub-c) de este documento.
 
 ![mcbecc.svg](/img/mcbecc.svg)
 
 ### Para generar código ejecutable para MCBE a partir de ensamblador
 - El comando ```./mcbeas -g prog.asm``` mostrará por pantalla los códigos de instrucciones MCBE equivalentes al programa en ensamblador.
-- El comando ```./mcbeas -g prog.asm > prog.exe``` guardará esos mismos códigos de instrucciones en un archivo llamado prog.exe.
+- El comando ```./mcbeas -g prog.asm > prog.exe``` guardará esos mismos códigos de instrucciones en un archivo llamado prog.exe, que por lo tanto estará en código de máquina de MCBE.
 
 ![mcbeas.svg](/img/mcbeas.svg)
 
@@ -114,6 +115,8 @@ Como en este caso la entrada está siendo tomada de la tubería, el programa mcb
 ----
 
 # Un video de cómo trabajar
+
+Esta animación se puede detener, reanudar, retroceder, etc. usando la barra de control al pie de la ventana. Se puede avanzar paso a paso con las teclas de las flechas.
 
 [![asciicast](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5.png)](https://asciinema.org/a/xiCBMssPwdwpeNlZTt0Mh3mF5)
 
