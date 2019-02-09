@@ -77,6 +77,34 @@ sub printstring {
 	my $inc = mklbl("INC"); # incremento
 	my $begin = mklbl("STR"); # puntero
 	my $end = mklbl("END");
+	my $ren = mklbl("REN"); # reentrancia
+	push @consts, "$inc:\t1";
+	push @consts, "$ren:\tLD $begin";
+	for my $i (0 .. $#chars) {
+		push @consts, (sprintf "%s\t%d", ($i ? "" : "$begin:"), ord($chars[$i]));
+	}
+	push @consts, "\t0"; # string null
+	push @prog, (
+		"$lbl:\tLD $begin", 
+		"\tJZ $end",
+		"\tST OUT",
+		"\tLD $lbl",
+		"\tADD $inc",
+		"\tST $lbl",
+		"\tJMP $lbl",
+		"$end:\tLD $ren",
+		"\tST $lbl"
+	);
+}
+
+sub printstring2 {
+	my $str = shift;
+
+	my @chars = split "", $str;
+	my $lbl = mklbl("LBL"); # incremento
+	my $inc = mklbl("INC"); # incremento
+	my $begin = mklbl("STR"); # puntero
+	my $end = mklbl("END");
 	push @consts, "$inc:\t1";
 	for my $i (0 .. $#chars) {
 		push @consts, (sprintf "%s\t%d", ($i ? "" : "$begin:"), ord($chars[$i]));
