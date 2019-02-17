@@ -118,8 +118,7 @@ Como en este caso la entrada está siendo tomada de la tubería, el programa mcb
 
 Esta animación se puede detener, reanudar, retroceder, etc. usando la barra de control al pie de la ventana. Se puede avanzar o retroceder paso a paso con las teclas de las flechas.
 
-[![asciicast](https://asciinema.org/a/YZXGHGzmZbGByc2opWI4gwRxw.png)](https://asciinema.org/a/YZXGHGzmZbGByc2opWI4gwRxw)
-
+[![asciicast](https://asciinema.org/a/rcaWxBtFgxCfS85cbqRldvK0j.png)](https://asciinema.org/a/rcaWxBtFgxCfS85cbqRldvK0j)
 
 ----
 ## Sub-C
