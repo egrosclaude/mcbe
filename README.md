@@ -69,14 +69,14 @@ Para usar estos programas en esa máquina virtual:
 
 ## Uso de los programas en línea de comandos
 
-### Para traducir un programa en C a ensamblador
+### Para traducir un programa en C a código ensamblador
 - El comando ```./mcbecc prog.c``` mostrará por pantalla los mnemónicos de ensamblador MCBE equivalentes al programa en lenguaje C. 
 - El comando ```./mcbecc prog.c > prog.asm``` guardará esos mismos mnemónicos en un archivo llamado prog.asm, que estará en lenguaje ensamblador del MCBE.
 - La sintaxis del subconjunto del lenguaje C admitida por mcbecc se describe en la sección [Sub-C](#sub-c) de este documento.
 
 ![mcbecc.svg](/img/mcbecc.svg)
 
-### Para generar código ejecutable para MCBE a partir de ensamblador
+### Para generar código ejecutable para MCBE a partir de código ensamblador
 - El comando ```./mcbeas -g prog.asm``` mostrará por pantalla los códigos de instrucciones MCBE equivalentes al programa en ensamblador.
 - El comando ```./mcbeas -g prog.asm > prog.exe``` guardará esos mismos códigos de instrucciones en un archivo llamado prog.exe, que por lo tanto estará en código de máquina de MCBE.
 
@@ -89,11 +89,11 @@ Para usar estos programas en esa máquina virtual:
 
 ![mcbe.svg](/img/mcbe.svg)
 
-### Para ensamblar un programa en ensamblador
+### Para ensamblar un programa en código ensamblador
 - El comando ```./mcbeas -a prog.asm``` mostrará por pantalla los códigos de instrucciones equivalentes a los mnemónicos pero en formato de números binarios.
 - El comando ```./mcbeas -a -v prog.asm``` mostrará por pantalla la misma lista pero con mnemónicos y números de línea.
 
-### Para interpretar un programa en ensamblador
+### Para interpretar un programa en código ensamblador
 - El comando ```./mcbeas -i -v prog.asm``` interpretará el programa en ensamblador, mostrando a cada paso el estado de la máquina con sus registros y memoria.
 
 ### Para encadenar operaciones
