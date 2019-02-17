@@ -1,0 +1,21 @@
+wget https://github.com/egrosclaude/mcbe/archive/master.zip
+unzip master.zip
+cd mcbe-master
+ls -l
+ls -l ejemplos
+cat ejemplos/neg.asm
+./mcbeas
+./mcbeas -a ejemplos/neg.asm
+./mcbeas -g ejemplos/neg.asm > neg.exe
+ls -l neg.exe
+
+./mcbe neg.exe
+
+cat ejemplos/test1.c
+./mcbecc ejemplos/test1.c > test1.asm
+cat test1.asm
+./mcbeas -g test1.asm > test1.exe
+./mcbe test1.exe
+./mcbe -A test1.exe
+./mcbe -H test1.exe
+
