@@ -278,6 +278,22 @@ sub asg3 { # a = a + 1 o a = b + 1
 	my $dato = mklbl("DATO");
 	push @consts, "$dato:\t$v";
 
+	push @prog, (
+		(sprintf "\tLD %s", uc($k2)),
+		(($s eq "+") ? "\tADD $dato" : "\tSUB $dato"),
+		(sprintf "\tST %s",uc($k1))
+	)
+}
+
+sub ex_asg3 { # a = a + 1 o a = b + 1
+	my ($k1, $k2, $s, $v) = @_;
+
+	testvar($k1);
+	testvar($k2);
+	
+	my $dato = mklbl("DATO");
+	push @consts, "$dato:\t$v";
+
 	if($k1 eq $k2) { # a = a + 1
 		push @prog, (
 			(sprintf "\tLD %s", uc($k1)),
