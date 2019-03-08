@@ -5,9 +5,9 @@ Programas para trabajar con el Modelo Computacional Binario Elemental (MCBE)
 # Qué es el MCBE
 Es una máquina de programa almacenado, **teórica y minimalista**, que cuenta con una CPU, una memoria y órganos de entrada/salida. Su finalidad es introducir a temas de Organización y Arquitectura de Computadoras. Forma parte del material didáctico de la asignatura [Introducción a la Computación](http://pedco.uncoma.edu.ar/course/view.php?id=1553) de primer año de las licenciaturas de la Facultad de Informática de la Universidad Nacional del Comahue.
 
-![MCBE](https://egrosclaude.github.io/IC2017/img/MCBE.svg)
+![MCBE](https://egrosclaude.github.io/IC/img/MCBE.svg)
 
-En el [material de dicha asignatura](https://egrosclaude.github.io/IC2017/ArquitecturaDeComputadoras.html) puede estudiarse una descripción completa del MCBE.
+En el [material de dicha asignatura](https://egrosclaude.github.io/IC/ArquitecturaDeComputadoras.html) puede estudiarse una descripción completa del MCBE.
 
 ----
 # Contenidos
@@ -54,13 +54,13 @@ El programa **mcbecc** es un **traductor** de Sub-C (un subconjunto de C) al len
 
 ## ¡No tengo Linux!
 
-¿No Linux? ¡No problem! La [máquina virtual Linux en Javascript](https://egrosclaude.github.io/IC2017/SistemasOperativos.html#/41) que hemos ofrecido como recurso de la materia cuenta con un intérprete de Perl que viene de lujo. Solamente hay que ser astutos y saber usar la función de subir archivos. 
+¿No Linux? ¡No problem! La [máquina virtual Linux en Javascript](https://egrosclaude.github.io/IC/SistemasOperativos.html#/41) que hemos ofrecido como recurso de la materia cuenta con un intérprete de Perl que viene de lujo. Solamente hay que ser astutos y saber usar la función de subir archivos. 
 
 Para usar estos programas en esa máquina virtual:
 
 - Descargar https://github.com/egrosclaude/mcbe/archive/master.zip en nuestra máquina.
 - Descomprimir master.zip.
-- Ingresar a la [máquina virtual Linux](https://egrosclaude.github.io/IC2017/SistemasOperativos.html#/41).
+- Ingresar a la [máquina virtual Linux](https://egrosclaude.github.io/IC/SistemasOperativos.html#/41).
 - Pulsar el botón de **upload** o subir archivos que está junto a la cajita "Paste Here". No se ve bien debido al fondo negro, pero está ahí.
 - Elegir los archivos mcbe, mcbecc y mcbeas de nuestro directorio mcbe-master y subirlos a la máquina virtual. El resto del trabajo se puede hacer dentro de la máquina virtual.
 - Ponerles atributo de ejecutable a los tres programas con el comando ```chmod a+x mcbe*```.
@@ -130,8 +130,8 @@ A continuación describimos el lenguaje Sub-C que es capaz de comprender el prog
 
 ### Programa
 
-- Constituido por una única función, main()
-- Sentencias terminadas por punto y coma
+- Constituido por una única función, main().
+- Sentencias terminadas por punto y coma.
 
 ```
 int main()
@@ -142,18 +142,18 @@ int main()
 
 
 ### Constantes numéricas
-- Únicamente constantes enteras en formato decimal
+- Únicamente constantes enteras en formato decimal.
 
 ### Constantes de cadena o strings
-- Caracteres ASCII entre comillas dobles
+- Caracteres ASCII entre comillas dobles.
 
 ### Variables
 
-- Variables enteras 
-- Deben estar declaradas 
-- Sus nombres pueden contener dígitos pero deben comenzar por una letra
-- Opcionalmente, inicializadas en la declaración
-- Constantes y variables son almacenadas en 8 bits en complemento a 2
+- Variables enteras.
+- Deben estar declaradas.
+- Sus nombres pueden contener dígitos pero deben comenzar por una letra.
+- Opcionalmente, inicializadas en la declaración.
+- Constantes y variables son almacenadas en 8 bits en complemento a 2.
 
 ```
 int main()
@@ -167,8 +167,8 @@ int main()
 
 ### Asignaciones
 
-- Asignación de constantes a variables
-- Asignación de variables a variables
+- Asignación de constantes a variables.
+- Asignación de variables a variables.
 
 ```
 int main()
@@ -184,9 +184,9 @@ int main()
 
 ### Operaciones aritméticas
 
-- Sumas y restas entre exactamente dos operandos
-- Los operandos pueden ser variables o constantes
-- Únicamente pueden aparecer como miembro derecho de una asignación
+- Sumas y restas entre exactamente dos operandos.
+- Los operandos pueden ser variables o constantes.
+- Únicamente pueden aparecer como miembro derecho de una asignación.
 
 ```
 int main()
@@ -204,7 +204,7 @@ int main()
 
 #### Acumulador
 
-- Cuando las mismas variables aparecen en ambos miembros de la asignación se obtiene una construcción de "acumulador"
+- Cuando las mismas variables aparecen en ambos miembros de la asignación se obtiene una construcción de "acumulador".
 
 ```
 int main()
@@ -216,7 +216,7 @@ int main()
 ```
 #### Operador de autoincremento y autodecremento
 
-- Una variable puede incrementar o decrementar en 1 su valor con la sintaxis siguiente
+- Una variable puede incrementar o decrementar en 1 su valor con la sintaxis siguiente.
 
 ```
 int main()
