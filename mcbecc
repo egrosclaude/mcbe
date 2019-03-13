@@ -14,7 +14,9 @@ my ($main, $endmain) = (0,0);
 
 my @conds = ();
 
-
+#
+# Analisis sintactico - busca cadenas e invoca a funciones que generan assembler
+#
 /^\/\// and next;
 /int main()/ and setmain(1);
 
@@ -63,12 +65,19 @@ sub myprint {
 	print "@msg\n" if $DEBUG;
 }
 
+# genera rotulos con prefijo alfanumerico 
+# y sufijo numerico de dos digitos unico y automaticamente creciente
 sub mklbl {
 	my $class = shift;
 
 	return sprintf "%s%02d", $class, $lastconst++;
 }
 
+# la funcion printstring genera un segmento de programa que imprime un string 
+# el segmento se automodifica incrementando la direccion argumento de la instruccion de OUT
+# esta version de la funcion genera un programa que guarda la direccion original del string
+# y asi puede ser llamada mas de una vez - al costo de dos bytes extra   
+# printstring2 genera un programa mas corto pero no puede ser llamado mas de una vez por cada string
 sub printstring {
 	my $str = shift;
 
@@ -97,7 +106,9 @@ sub printstring {
 	);
 }
 
-sub printstring2 {
+# esta version de printstring genera un segmento de programa 
+# que se automodifica y no puede ser llamado mas de una vez 
+sub printstring2 { # 
 	my $str = shift;
 
 	my @chars = split "", $str;
@@ -132,9 +143,9 @@ sub if1begin {# if(a != 2)
 
 	my $conde = "COND".$lastcond;
 	push @prog, (
-		(sprintf "\tLD %s", uc($k)),
-		"\tSUB $dato",
-		"\tJZ $conde"
+	(sprintf "\tLD %s", uc($k)),
+		 "\tSUB $dato",
+		" \tJZ $conde"
 	);
 	push @conds, "$conde:\tNOP";
 	$lastcond++;
@@ -150,7 +161,7 @@ sub if2begin {# if(a != b)
 	push @prog, (
 		(sprintf "\tLD %s", uc($k1)),
 		(sprintf "\tSUB %s", uc($k2)),
-		"\tJZ $conde"
+		         "\tJZ $conde"
 	);
 	push @conds, "$conde:\tNOP";
 	$lastcond++;
